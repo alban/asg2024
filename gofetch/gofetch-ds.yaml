@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: gofetch
+  labels:
+    k8s-app: gofetch
+spec:
+  selector:
+    matchLabels:
+      name: gofetch
+  template:
+    metadata:
+      labels:
+        name: gofetch
+        role: demo
+    spec:
+      containers:
+      - name: gofetch
+        image: ghcr.io/alban/asg2024/gofetch:latest
+        command: [ "sh", "-c", "while sleep 2 ; do /gofetch https://www.wikipedia.org ; done" ]
