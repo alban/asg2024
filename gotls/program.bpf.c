@@ -13,56 +13,7 @@
 #include <gadget/mntns_filter.h>
 #include <gadget/types.h>
 
-#undef bpf_printk
-#define bpf_printk(fmt, ...)                            \
-({                                                      \
-        static const char ____fmt[] = fmt;              \
-        bpf_trace_printk(____fmt, sizeof(____fmt),      \
-                         ##__VA_ARGS__);                \
-})
-
-
-struct pt_regs;
-#define PT_REGS_ARM64 const volatile struct user_pt_regs
-
-#define __TARGET_ARCH_arm64 1
-#if defined(__TARGET_ARCH_x86)
-
-#define GO_PARAM1(x) ((void*)(x)->ax)
-#define GO_PARAM2(x) ((void*)(x)->bx)
-#define GO_PARAM3(x) ((void*)(x)->cx)
-#define GO_PARAM4(x) ((void*)(x)->di)
-#define GO_PARAM5(x) ((void*)(x)->si)
-#define GO_PARAM6(x) ((void*)(x)->r8)
-#define GO_PARAM7(x) ((void*)(x)->r9)
-#define GO_PARAM8(x) ((void*)(x)->r10)
-#define GO_PARAM9(x) ((void*)(x)->r11)
-
-// In x86, current goroutine is pointed by r14, according to
-// https://go.googlesource.com/go/+/refs/heads/dev.regabi/src/cmd/compile/internal-abi.md#amd64-architecture
-#define GOROUTINE_PTR(x) ((void*)(x)->r14)
-
-#elif defined(__TARGET_ARCH_arm64)
-
-#define GO_PARAM1(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[0])
-#define GO_PARAM2(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[1])
-#define GO_PARAM3(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[2])
-#define GO_PARAM4(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[3])
-#define GO_PARAM5(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[4])
-#define GO_PARAM6(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[5])
-#define GO_PARAM7(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[6])
-#define GO_PARAM8(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[7])
-#define GO_PARAM9(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[8])
-#define GO_PARAM10(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[9])
-#define GO_PARAM11(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[10])
-#define GO_PARAM12(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[11])
-#define GO_PARAM13(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[12])
-
-// In arm64, current goroutine is pointed by R28 according to
-// https://github.com/golang/go/blob/master/src/cmd/compile/abi-internal.md#arm64-architecture
-#define GOROUTINE_PTR(x) ((void*)((PT_REGS_ARM64 *)(x))->regs[28])
-
-#endif /*defined(__TARGET_ARCH_arm64)*/
+#include "beyla-utils.h"
 
 #define PKTLEN 2048
 
