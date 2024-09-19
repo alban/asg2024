@@ -1,0 +1,17 @@
+name: gotls
+description: Show unencrypted traffic via the crypto/tls standard Golang library
+homepageURL: https://github.com/alban/asg2024
+documentationURL: https://github.com/alban/asg2024
+sourceURL: https://github.com/alban/asg2024
+datasources:
+  raw:
+    fields:
+      buf:
+        annotations:
+          description: Unencrypted buffer
+      fd:
+        annotations:
+          description: File descriptor
+      len:
+        annotations:
+          description: Length
