@@ -9,9 +9,9 @@ datasources:
       buf:
         annotations:
           description: Unencrypted buffer
-      fd:
-        annotations:
-          description: File descriptor
       len:
         annotations:
           description: Length
+      op_raw:
+        annotations:
+          description: 'Operation: read or write'

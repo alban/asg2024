@@ -17,8 +17,13 @@
 
 #define PKTLEN 2048
 
+enum op {
+	WRITE,
+	READ,
+};
+
 struct event {
-    __u64 fd;
+    enum op op_raw;
     __u64 len;
     char buf[PKTLEN];
 };
@@ -60,7 +65,7 @@ int uprobe_write(struct pt_regs *ctx) {
         if (!event)
             break;
 
-        event->len = curlen;
+        event->op_raw = WRITE;
         bpf_probe_read_user(&event->buf[0], curlen, (unsigned char*)(buf_ptr)+offs);
         gadget_submit_buf(ctx, &events, event, sizeof(*event));
         remaining -= curlen;
@@ -115,7 +120,7 @@ int uretprobe_read(struct pt_regs *ctx) {
             break;
         }
 
-        event->fd = tlsinfo->tls;
+        event->op_raw = READ;
         event->len = curlen;
         bpf_probe_read_user(&event->buf[0], curlen, (unsigned char*)(tlsinfo->buf_ptr)+offs);
         gadget_submit_buf(ctx, &events, event, sizeof(*event));
