@@ -5,13 +5,14 @@
 ### In Docker
 
 ```
-docker run -ti --rm ghcr.io/alban/asg2024/gofetch /gofetch https://www.w3.org/robots.txt
+docker run -ti --rm ghcr.io/alban/asg2024/worker /worker
 ```
 
 ### In Kubernetes
 
 ```
-kubectl apply -f gofetch/gofetch-ds.yaml
+kubectl apply -f server/server-ds.yaml
+kubectl apply -f worker/worker-ds.yaml
 ```
 
 ## Run gotls gadget
