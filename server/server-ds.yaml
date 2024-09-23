@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: server
+  labels:
+    k8s-app: server
+spec:
+  selector:
+    matchLabels:
+      name: server
+  template:
+    metadata:
+      labels:
+        name: server
+        role: demo
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: server
+        image: ghcr.io/alban/asg2024/server:latest
+        command: [ "/server" ]

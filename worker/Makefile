@@ -1,4 +1,4 @@
-CONTAINER_REPO ?= ghcr.io/alban/asg2024/gofetch
+CONTAINER_REPO ?= ghcr.io/alban/asg2024/worker
 IMAGE_TAG ?= latest
 
 docker/build:

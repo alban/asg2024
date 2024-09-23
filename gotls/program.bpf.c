@@ -13,7 +13,7 @@
 #include <gadget/mntns_filter.h>
 #include <gadget/types.h>
 
-#include "beyla-utils.h"
+#include "go-utils.h"
 
 #define PKTLEN 2048
 
@@ -43,7 +43,7 @@ struct {
 GADGET_TRACER_MAP(events, 4096*4096); // 4096 in-flight pages
 GADGET_TRACER(raw, events, event);
 
-SEC("uprobe//gofetch:crypto/tls.(*Conn).Write")
+SEC("uprobe//worker:crypto/tls.(*Conn).Write")
 int uprobe_write(struct pt_regs *ctx) {
     __u64 buf_ptr = (__u64)GO_PARAM2(ctx);
     __u32 len = (__u64)GO_PARAM3(ctx);
@@ -76,7 +76,7 @@ int uprobe_write(struct pt_regs *ctx) {
     return 0;
 }
 
-SEC("uprobe//gofetch:crypto/tls.(*Conn).Read")
+SEC("uprobe//worker:crypto/tls.(*Conn).Read")
 int uprobe_read(struct pt_regs *ctx) {
     __u64 goroutine_addr = (__u64)GOROUTINE_PTR(ctx);
 
@@ -89,7 +89,7 @@ int uprobe_read(struct pt_regs *ctx) {
     return 0;
 }
 
-SEC("uretprobe//gofetch:crypto/tls.(*Conn).Read")
+SEC("uretprobe//worker:crypto/tls.(*Conn).Read")
 int uretprobe_read(struct pt_regs *ctx) {
     __u32 len = (__u64)GO_PARAM1(ctx);
 

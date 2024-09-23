@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: worker
+  labels:
+    k8s-app: worker
+spec:
+  selector:
+    matchLabels:
+      name: worker
+  template:
+    metadata:
+      labels:
+        name: worker
+        role: demo
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: worker
+        image: ghcr.io/alban/asg2024/worker:latest
+        command: [ "/worker" ]
