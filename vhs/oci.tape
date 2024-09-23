@@ -65,8 +65,12 @@ Enter
 Sleep 5s
 
 Type "# Let's run the gadget using curl | sh ..."
-Enter
-Type "# Just kidding. Let's sign it first."
+Sleep 3s
+Backspace@15ms 40
+Type "Just kidding."
+Sleep 1s
+Backspace@15ms 13
+Type "Let's sign our gadget first."
 Enter
 Sleep 1s
 
