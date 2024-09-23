@@ -46,7 +46,7 @@ func (c *Client) RunUploader() {
 				},
 			},
 		}
-		req, err := http.NewRequest("POST", "https://server:8443", bytes.NewBuffer(fc))
+		req, err := http.NewRequest("POST", "https://server:8443/process", bytes.NewBuffer(fc))
 		if err != nil {
 			continue
 		}
