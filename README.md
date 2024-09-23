@@ -12,6 +12,7 @@ docker run -ti --rm ghcr.io/alban/asg2024/worker /worker
 
 ```
 kubectl apply -f server/server-ds.yaml
+kubectl apply -f server/server-svc.yaml
 kubectl apply -f worker/worker-ds.yaml
 ```
 

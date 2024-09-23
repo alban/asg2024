@@ -19,3 +19,6 @@ spec:
       - name: worker
         image: ghcr.io/alban/asg2024/worker:latest
         command: [ "/worker" ]
+        env:
+        - name: TICKER
+          value: "5s"
