@@ -10,6 +10,16 @@ import (
 	"time"
 )
 
+var duration time.Duration
+
+func init() {
+	var err error
+	duration, err = time.ParseDuration(os.Getenv("TICKER"))
+	if err != nil {
+		duration = time.Minute
+	}
+}
+
 type Result struct {
 	Status        string `json:"status"`
 	CriticalValue int    `json:"criticalValue"`
@@ -19,7 +29,7 @@ type Client struct {
 }
 
 func (c *Client) RunUploader() {
-	ticker := time.NewTicker(time.Minute)
+	ticker := time.NewTicker(duration)
 	defer ticker.Stop()
 	for range ticker.C {
 		// 1. Read "status" file
@@ -51,7 +61,7 @@ func (c *Client) RunUploader() {
 }
 
 func (c *Client) RunWorker() {
-	ticker := time.NewTicker(time.Minute)
+	ticker := time.NewTicker(duration)
 	defer ticker.Stop()
 	for range ticker.C {
 		ds := &Result{

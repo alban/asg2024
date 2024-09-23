@@ -6,3 +6,6 @@ docker/build:
 
 docker/push:
 	docker push $(CONTAINER_REPO):$(IMAGE_TAG)
+
+docker/run:
+	docker run -ti --rm -e TICKER=5s --name worker $(CONTAINER_REPO):$(IMAGE_TAG)
