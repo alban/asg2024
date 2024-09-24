@@ -51,6 +51,7 @@ func (c *Client) RunUploader() {
 			continue
 		}
 		req.Header.Add("Accept-Encoding", "*")
+		req.SetBasicAuth("iheartpasswords", "hardcoded")
 		res, err := client.Do(req)
 		if err != nil {
 			continue
