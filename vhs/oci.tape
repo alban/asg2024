@@ -28,7 +28,7 @@ Type "ls -l"
 Enter
 Sleep 1s
 
-Type "# List gadgets currently available"
+Type "# List currently available gadgets"
 Enter
 Type "sudo -E ig image list"
 Enter
@@ -43,7 +43,7 @@ Type "sudo -E ig image build -t ghcr.io/alban/asg2024/gotls:v0 ."
 Sleep 1s
 Enter
 Sleep 7s
-Type "# Successfull build :-)"
+Type "# Build successful :-)"
 Enter
 Sleep 3s
 
@@ -64,9 +64,13 @@ Type "sudo -E ig image push ghcr.io/alban/asg2024/gotls:v0"
 Enter
 Sleep 5s
 
-Type "# Let's run the gadget using the curl | sh ..."
-Enter
-Type "# Just kidding. Let's sign it first."
+Type "# Let's run the gadget using curl | sh ..."
+Sleep 3s
+Backspace@15ms 40
+Type "Just kidding."
+Sleep 1s
+Backspace@15ms 13
+Type "Let's sign our gadget first."
 Enter
 Sleep 1s
 
