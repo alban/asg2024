@@ -47,16 +47,45 @@ Type "    --image=ghcr.io/inspektor-gadget/ig:latest \"
 Enter
 Type "    -- \"
 Enter
-Type "    ig run trace_open:latest \"
+Type "    ig run trace_dns:latest \"
 Enter
 Type "    -r containerd \"
 Enter
-Type "    -c worker-q879d"
+Type "    -c worker"
 Sleep 2s
 Enter
 Sleep 15s
 Ctrl+C
 Sleep 2s
-Type "# Not many relevant events from the trace_open gadget"
+Type "# Not much relevant information from this gadget"
 Enter
+Sleep 10s
+
+Type "kubectl debug node"
+Sleep 1s
+Type "/minikube-containerd \"
+Sleep 1s
+Enter
+Type "    --profile=sysadmin \"
+Enter
+Type "    -ti \"
+Enter
+Type "    --image=ghcr.io/inspektor-gadget/ig:latest \"
+Enter
+Type "    -- \"
+Enter
+Type "    ig run ghcr.io/alban/asg2024/gotls:v0 \"
+Enter
+Type `    --public-keys="$(cat cosign.pub)" \`
+Enter
+Type "    -r containerd \"
+Enter
+Type "    -c worker"
+Sleep 2s
+Enter
+Sleep 15s
+Ctrl+C
+Sleep 2s
+
+
 Sleep 10s

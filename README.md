@@ -27,7 +27,7 @@ sudo -E ig run ghcr.io/alban/asg2024/gotls -o jsonpretty
 ### With Kubernetes
 
 ```
-kubectl gadget deploy --gadgets-public-keys="$(cat gotls/cosign.pub)"
+kubectl gadget deploy --gadgets-public-keys="$(cat vhs/cosign.pub),$(cat $HOME/go/src/github.com/inspektor-gadget/inspektor-gadget/pkg/resources/inspektor-gadget.pub)"
 kubectl gadget run ghcr.io/alban/asg2024/gotls -o jsonpretty
 ```
 
