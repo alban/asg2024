@@ -23,12 +23,7 @@ Enter
 Sleep 2s
 Show
 
-Type "# Let's investigate our Kubernetes workload"
-Enter
-Type "# Using Inspektor Gadget with the kubectl plugin"
-Enter
-Type "kubectl get pod -n gadget"
-Sleep 1s
+Type "# Run our gadget gotls"
 Enter
 Sleep 1s
 Type "kubectl gadget run \"
@@ -42,16 +37,4 @@ Sleep 2s
 Enter
 Sleep 15s
 Ctrl+C
-Sleep 2s
-Type "# We've used our gadget:"
-Enter
-Type "# - with container filtering"
-Enter
-Type "#   (selecting Kubernetes labels with -l role=demo)"
-Enter
-Type "# - container enrichment"
-Enter
-Type "#   (events with pod names)"
-Enter
-
-Sleep 10s
+Sleep 15s
